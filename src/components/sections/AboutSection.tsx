@@ -282,7 +282,6 @@ export default function AboutSection() {
       <style>{styles}</style>
       <section className="about-section">
         <div className="about-inner">
-
           {/* ── Left: Image ── */}
           <Reveal direction="left" delay={100}>
             <div className="about-image-wrap">
@@ -343,25 +342,23 @@ export default function AboutSection() {
               </div>
 
               <p className="about-body">
-                Tact Innovations Design &amp; General Contracting is a premier
-                design and construction firm with a distinguished reputation for
-                delivering extraordinary spaces. We blend visionary architecture
-                with disciplined engineering, transforming ambitious ideas into
-                enduring built reality.
+                Tact innovations design & general contracting is a cutting-edge
+                architectural design firm, founded in March 2023. We are a
+                leading company in the field of facilities management, and we
+                are also dedicated to shaping more bright future of living
+                spaces.
               </p>
               <p className="about-body">
-                Since our founding, we have been trusted by Egypt's most
-                discerning clients — from landmark commercial towers to intimate
-                residential masterpieces — each a testament to our unwavering
-                commitment to excellence.
+                With a passion for innovation, sustainability, and aesthetics,
+                we transform architectural dreams into reality.
               </p>
 
               <div className="about-stats-rule" />
               <div className="about-stats">
                 {[
-                  { from: 0, to: 15,  suffix: "+", lbl: "Years of Excellence" },
+                  { from: 0, to: 15, suffix: "+", lbl: "Years of Excellence" },
                   { from: 0, to: 200, suffix: "+", lbl: "Projects Completed" },
-                  { from: 0, to: 50,  suffix: "+", lbl: "Expert Team" },
+                  { from: 0, to: 50, suffix: "+", lbl: "Expert Team" },
                 ].map((s) => (
                   <div className="about-stat" key={s.lbl}>
                     <span className="about-stat-num">
@@ -381,7 +378,6 @@ export default function AboutSection() {
               </div>
             </div>
           </Reveal>
-
         </div>
       </section>
     </>

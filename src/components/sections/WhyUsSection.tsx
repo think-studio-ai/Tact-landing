@@ -4,23 +4,23 @@ import { Reveal } from "../../utils/Reveal";
 const reasons = [
   {
     num: "01",
-    title: "Proven Track Record",
-    desc: "Decades of successfully delivered projects spanning residential, commercial, and infrastructure sectors across Egypt.",
+    title: "Industry Leadership",
+    desc: "We are a leading company in design and finishing, specializing in real estate management and investment.",
   },
   {
     num: "02",
-    title: "End-to-End Expertise",
-    desc: "From initial 3D visualization to on-ground execution and logistics — we handle every dimension of your project.",
+    title: "Vision for the Future",
+    desc: "We are shaping the future of real estate for a better world by using the latest technologies to create rewarding opportunities and sustainable solutions.",
   },
   {
     num: "03",
-    title: "World-Class Team",
-    desc: "A multidisciplinary team of architects, engineers, and designers at the top of their respective fields.",
+    title: "Innovative & Sustainable Solutions",
+    desc: "We create amazing spaces and deliver sustainable real estate solutions for our clients, teams, and communities.",
   },
   {
     num: "04",
-    title: "Tailored Solutions",
-    desc: "Every project is unique. We craft bespoke strategies that align precisely with your goals and your budget.",
+    title: "Strategic Expansion",
+    desc: "TACT aims to expand across the local and Arab markets over the next five years, leveraging strong market research and abundant opportunities in Egypt and the region.",
   },
 ];
 
@@ -103,9 +103,10 @@ export default function WhyUsSection() {
               </h2>
               <div className="gold-rule" />
               <p className="why-body">
-                In a landscape crowded with contractors, Tact Innovations stands
-                apart through a rare combination of creative vision, technical
-                mastery, and an unwavering commitment to every client.
+                In a competitive real estate landscape, TACT stands out through
+                innovation, strategic vision, and a deep commitment to
+                delivering exceptional design, finishing, and investment
+                solutions.
               </p>
             </div>
           </Reveal>

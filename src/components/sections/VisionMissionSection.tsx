@@ -97,11 +97,12 @@ export default function VisionMissionSection() {
                 <span className="vm-tag">Our Vision</span>
                 <h3 className="vm-title">To Redefine the Built Environment</h3>
                 <p className="vm-text">
-                  We envision a world where every structure is a masterwork —
-                  where design excellence and human experience are inseparable.
-                  Tact Innovations aspires to be the region's most respected
-                  name in design and contracting, setting benchmarks that
-                  inspire the industry for generations to come.
+                  At Tact innovations design & general contracting, we believe
+                  that architecture is not just about structures; it's about
+                  creating environments that inspire, enrich, and endure. We
+                  envision cities where design harmonizes with nature, where
+                  functionality meets elegance, and communities thrive in
+                  beautiful, sustainable spaces.
                 </p>
               </div>
             </Reveal>
@@ -114,12 +115,12 @@ export default function VisionMissionSection() {
                   Delivering Excellence at Every Scale
                 </h3>
                 <p className="vm-text">
-                  Our mission is to provide comprehensive, integrated design and
-                  contracting solutions that exceed expectations. Through
-                  innovation, integrity, and meticulous craftsmanship, we
-                  transform our clients' most ambitious visions into
-                  extraordinary built reality — on time, within budget, and
-                  beyond expectation.
+                  Our mission is to transform the world through visio nary
+                  architecture and general contracting services. We are
+                  dedicated to creating exceptional environments that inspire,
+                  enrich, and endure. And we strive to bring together the
+                  perfect balance of design, functionality, and sustainability
+                  in every project we undertake.
                 </p>
               </div>
             </Reveal>
