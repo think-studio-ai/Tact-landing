@@ -1,4 +1,3 @@
-import React from "react";
 import { Reveal } from "../../utils/Reveal";
 import SplitText from "../SplitText";
 import CountUp from "../CountUp";

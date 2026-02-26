@@ -1,4 +1,3 @@
-import React, { useRef } from "react";
 import { Reveal } from "../../utils/Reveal";
 import SplitText from "../SplitText";
 import imag1 from "../../assets/image1.png"

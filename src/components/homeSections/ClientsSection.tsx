@@ -1,4 +1,3 @@
-import React from "react";
 import { Reveal } from "../../utils/Reveal";
 import SplitText from "../SplitText";
 import icon1 from "../../assets/1-removebg-preview.png";

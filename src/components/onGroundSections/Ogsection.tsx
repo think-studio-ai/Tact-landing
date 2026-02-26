@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import  { useState } from "react";
 import { type OGProject, OGLightbox, OGGallery, useReveal } from "./Ogshared";
 
 interface OGSectionProps {
