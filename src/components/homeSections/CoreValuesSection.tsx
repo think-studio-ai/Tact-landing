@@ -1,13 +1,18 @@
+// src/components/homeSections/CoreValuesSection.tsx
+// ✅ CHANGES:
+// 1. Removed @import Google Fonts
+// 2. Added loading="lazy" + width/height to card images
+
 import { Reveal } from "../../utils/Reveal";
 import SplitText from "../SplitText";
-import imag1 from "../../assets/image1.png"
-import imag2 from "../../assets/image2.png"
+import imag1 from "../../assets/image1.png";
+import imag2 from "../../assets/image2.png";
 import imag3 from "../../assets/image3.png";
 
 const values = [
   {
     id: "01",
-    image: imag1, // replace with your actual image path
+    image: imag1,
     title: "Sustainability First",
     desc: "We prioritize sustainable design, reducing environmental impact and enhancing quality of life through green building, energy efficiency, and renewable technologies.",
     keyword: "Green Future",
@@ -29,9 +34,8 @@ const values = [
 ];
 
 const styles = `
-  @import url('https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;1,300;1,400&family=Cormorant+SC:wght@300;400&family=EB+Garamond:ital,wght@0,400;1,400&display=swap');
+  /* NOTE: No @import here — fonts loaded once in index.html */
 
-  /* ─── Section Shell ─── */
   .cv2-section {
     background: #05080A;
     padding: 150px 60px 160px;
@@ -39,7 +43,6 @@ const styles = `
     overflow: hidden;
   }
 
-  /* Ambient glow top-right */
   .cv2-section::before {
     content: '';
     position: absolute;
@@ -49,7 +52,6 @@ const styles = `
     pointer-events: none;
     z-index: 0;
   }
-  /* Bottom-left glow */
   .cv2-section::after {
     content: '';
     position: absolute;
@@ -60,7 +62,6 @@ const styles = `
     z-index: 0;
   }
 
-  /* ─── Inner wrapper ─── */
   .cv2-inner {
     max-width: 1380px;
     margin: 0 auto;
@@ -68,7 +69,6 @@ const styles = `
     z-index: 1;
   }
 
-  /* ─── Section header ─── */
   .cv2-header {
     display: flex;
     flex-direction: column;
@@ -111,7 +111,6 @@ const styles = `
     color: #C4A464;
   }
 
-  /* ornament below title */
   .cv2-ornament {
     display: flex;
     align-items: center;
@@ -131,14 +130,12 @@ const styles = `
     flex-shrink: 0;
   }
 
-  /* ─── Cards grid ─── */
   .cv2-grid {
     display: grid;
     grid-template-columns: repeat(3, 1fr);
     gap: 28px;
   }
 
-  /* ─── Single Card ─── */
   .cv2-card {
     position: relative;
     display: flex;
@@ -154,7 +151,6 @@ const styles = `
     transform: translateY(-6px);
   }
 
-  /* top gold line reveal on hover */
   .cv2-card::before {
     content: '';
     position: absolute;
@@ -168,7 +164,6 @@ const styles = `
   }
   .cv2-card:hover::before { transform: scaleX(1); }
 
-  /* ─── Image container ─── */
   .cv2-img-wrap {
     position: relative;
     width: 100%;
@@ -189,7 +184,6 @@ const styles = `
     filter: grayscale(0%) contrast(1.04) brightness(0.92);
   }
 
-  /* gradient overlay on image bottom */
   .cv2-img-gradient {
     position: absolute;
     inset: 0;
@@ -202,44 +196,26 @@ const styles = `
     pointer-events: none;
   }
 
-  /* floating index number on image */
   .cv2-img-num {
-  position: absolute;
-  top: 18px;
-  right: 20px;
-  z-index: 2;
+    position: absolute;
+    top: 18px;
+    right: 20px;
+    z-index: 2;
+    font-family: 'Cormorant SC', serif;
+    font-size: 11px;
+    letter-spacing: 4px;
+    color: #C6A75E;
+    padding: 6px 14px;
+    background: rgba(10, 14, 18, 0.75);
+    backdrop-filter: blur(8px);
+    border: 1px solid rgba(198, 167, 94, 0.35);
+    border-radius: 30px;
+    box-shadow: 
+      0 0 12px rgba(198, 167, 94, 0.15),
+      inset 0 0 6px rgba(198, 167, 94, 0.08);
+    transition: all 0.35s ease;
+  }
 
-  font-family: 'Cormorant SC', serif;
-  font-size: 11px;
-  letter-spacing: 4px;
-
-  color: #C6A75E;
-
-  padding: 6px 14px;
-
-  background: rgba(10, 14, 18, 0.75);
-  backdrop-filter: blur(8px);
-
-  border: 1px solid rgba(198, 167, 94, 0.35);
-  border-radius: 30px;
-
-  box-shadow: 
-    0 0 12px rgba(198, 167, 94, 0.15),
-    inset 0 0 6px rgba(198, 167, 94, 0.08);
-
-  transition: all 0.35s ease;
-}
-.cv2-img-num:hover {
-  background: rgba(15, 20, 25, 0.9);
-  border-color: rgba(198, 167, 94, 0.6);
-  box-shadow: 
-    0 0 18px rgba(198, 167, 94, 0.3),
-    inset 0 0 8px rgba(198, 167, 94, 0.15);
-  transform: translateY(-2px);
-}
-
-
-  /* keyword tag bottom of image */
   .cv2-img-tag {
     position: absolute;
     bottom: 16px; left: 20px;
@@ -258,7 +234,6 @@ const styles = `
     transform: translateY(0);
   }
 
-  /* ─── Card body ─── */
   .cv2-body {
     padding: 38px 36px 42px;
     display: flex;
@@ -267,7 +242,6 @@ const styles = `
     position: relative;
   }
 
-  /* thin gold vertical rule left of body */
   .cv2-body::before {
     content: '';
     position: absolute;
@@ -290,7 +264,6 @@ const styles = `
   }
   .cv2-card:hover .cv2-card-title { color: #C4A464; }
 
-  /* thin divider */
   .cv2-card-divider {
     width: 32px; height: 1px;
     background: rgba(184,151,90,0.3);
@@ -310,7 +283,6 @@ const styles = `
   }
   .cv2-card:hover .cv2-card-desc { color: rgba(240,234,224,0.58); }
 
-  /* arrow indicator bottom-right */
   .cv2-card-arrow {
     display: flex;
     align-items: center;
@@ -336,7 +308,6 @@ const styles = `
     color: #B8975A;
   }
 
-  /* ─── bottom rule ─── */
   .cv2-footer {
     margin-top: 72px;
     display: flex;
@@ -362,7 +333,6 @@ const styles = `
     text-transform: uppercase;
   }
 
-  /* ─── Responsive ─── */
   @media (max-width: 1024px) {
     .cv2-grid { grid-template-columns: 1fr 1fr; gap: 20px; }
     .cv2-section { padding: 110px 40px 120px; }
@@ -381,7 +351,6 @@ export default function CoreValuesSection() {
       <style>{styles}</style>
       <section className="cv2-section">
         <div className="cv2-inner">
-          {/* ── Header ── */}
           <Reveal>
             <div className="cv2-header">
               <p className="cv2-label">What We Stand For</p>
@@ -426,20 +395,26 @@ export default function CoreValuesSection() {
             </div>
           </Reveal>
 
-          {/* ── Cards ── */}
           <div className="cv2-grid">
             {values.map((v, i) => (
               <Reveal key={v.id} delay={i * 120}>
                 <div className="cv2-card">
-                  {/* Image */}
                   <div className="cv2-img-wrap">
-                    <img className="cv2-img" src={v.image} alt={v.title} />
+                    <img
+                      className="cv2-img"
+                      src={v.image}
+                      alt={v.title}
+                      // ✅ FIX: lazy load card images — below the fold
+                      loading="lazy"
+                      width="800"
+                      height="600"
+                      decoding="async"
+                    />
                     <div className="cv2-img-gradient" />
                     <span className="cv2-img-num">{v.id}</span>
                     <span className="cv2-img-tag">{v.keyword}</span>
                   </div>
 
-                  {/* Body */}
                   <div className="cv2-body">
                     <h3 className="cv2-card-title">{v.title}</h3>
                     <div className="cv2-card-divider" />
@@ -454,7 +429,6 @@ export default function CoreValuesSection() {
             ))}
           </div>
 
-          {/* ── Footer ornament ── */}
           <Reveal delay={300}>
             <div className="cv2-footer">
               <div className="cv2-footer-line rev" />

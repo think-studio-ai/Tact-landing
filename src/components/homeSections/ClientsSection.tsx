@@ -1,3 +1,9 @@
+// src/components/homeSections/ClientsSection.tsx
+// ✅ CHANGES:
+// 1. Removed @import Google Fonts (loaded once in index.html)
+// 2. Added loading="lazy" to all marquee logo images
+// 3. Added explicit width/height to prevent CLS
+
 import { Reveal } from "../../utils/Reveal";
 import SplitText from "../SplitText";
 import icon1 from "../../assets/1-removebg-preview.png";
@@ -12,8 +18,6 @@ import icon9 from "../../assets/9.png";
 import icon10 from "../../assets/10.png";
 import icon11 from "../../assets/11.png";
 
-
-// Replace these paths with your actual image paths in /public or /assets
 const clients = [
   { id: 1, name: "Ibda", src: icon1 },
   { id: 2, name: "Hayah Karima", src: icon2 },
@@ -25,11 +29,12 @@ const clients = [
   { id: 8, name: "Residential Fit Outs", src: icon8 },
   { id: 9, name: "Kemet News", src: icon9 },
   { id: 10, name: "Egypt Casting", src: icon10 },
-  { id: 10, name: "Egypt Casting", src: icon11 },
+  { id: 11, name: "Egypt Casting 2", src: icon11 },
 ];
 
 const styles = `
-  /* ─── Section ─── */
+  /* NOTE: No @import here — fonts loaded once in index.html */
+
   .cl2-section {
     background: #040709;
     padding: 155px 60px 160px;
@@ -38,7 +43,6 @@ const styles = `
     border-top: 1px solid rgba(184,151,90,0.07);
   }
 
-  /* Ambient center glow */
   .cl2-section::before {
     content: '';
     position: absolute;
@@ -50,7 +54,6 @@ const styles = `
     z-index: 0;
   }
 
-  /* Noise */
   .cl2-noise {
     position: absolute;
     inset: 0;
@@ -60,7 +63,6 @@ const styles = `
     z-index: 0;
   }
 
-  /* ─── Inner ─── */
   .cl2-inner {
     max-width: 1380px;
     margin: 0 auto;
@@ -68,7 +70,6 @@ const styles = `
     z-index: 1;
   }
 
-  /* ─── Header ─── */
   .cl2-header {
     display: grid;
     grid-template-columns: 1fr 1fr;
@@ -134,7 +135,6 @@ const styles = `
     margin: 0;
   }
 
-  /* ─── Stat chips ─── */
   .cl2-stats {
     display: flex;
     gap: 0;
@@ -183,7 +183,6 @@ const styles = `
     color: rgba(240,234,224,0.28);
   }
 
-  /* ─── Marquee wrapper ─── */
   .cl2-marquee-outer {
     position: relative;
     border-top: 1px solid rgba(184,151,90,0.09);
@@ -191,7 +190,6 @@ const styles = `
     overflow: hidden;
   }
 
-  /* Fade masks */
   .cl2-marquee-outer::before,
   .cl2-marquee-outer::after {
     content: '';
@@ -210,7 +208,6 @@ const styles = `
     background: linear-gradient(-90deg, #040709 0%, transparent 100%);
   }
 
-  /* Two rows of marquee */
   .cl2-marquee-row {
     display: flex;
     width: max-content;
@@ -223,6 +220,10 @@ const styles = `
   .cl2-marquee-row.row-2 {
     animation: cl2-scroll-right 40s linear infinite;
   }
+  /* ✅ FIX: Use will-change only on animating element, and pause on hover */
+  .cl2-marquee-row {
+    will-change: transform;
+  }
   .cl2-marquee-row:hover { animation-play-state: paused; }
 
   @keyframes cl2-scroll-left {
@@ -234,7 +235,6 @@ const styles = `
     100% { transform: translateX(0); }
   }
 
-  /* ─── Logo pill ─── */
   .cl2-logo-pill {
     display: flex;
     align-items: center;
@@ -250,7 +250,6 @@ const styles = `
     background: rgba(184,151,90,0.025);
   }
 
-  /* Separator diamond */
   .cl2-logo-pill::after {
     content: '◆';
     position: absolute;
@@ -264,49 +263,42 @@ const styles = `
 
   .cl2-logo-img {
     max-height: 72px;
-    max-width:  200px;
+    max-width: 200px;
     width: auto;
     object-fit: contain;
     display: block;
-
-    /* Grayscale + dim at rest */
     filter: grayscale(100%) brightness(0.55) contrast(1.1);
     opacity: 0.65;
-
     transition:
       filter 0.55s cubic-bezier(0.16,1,0.3,1),
       opacity 0.55s ease,
       transform 0.45s cubic-bezier(0.16,1,0.3,1);
   }
 
-  /* Hover: full color, full brightness */
   .cl2-logo-pill:hover .cl2-logo-img {
     filter: grayscale(0%) brightness(1) contrast(1);
     opacity: 1;
     transform: scale(1.06);
   }
 
-  /* ─── Simple Centered Header ─── */
-.cl2-header-simple {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  margin-bottom: 100px;
-  text-align: center;
-}
+  .cl2-header-simple {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-bottom: 100px;
+    text-align: center;
+  }
 
-.cl2-title.centered {
-  font-family: 'Cormorant Garamond', serif;
-  font-size: clamp(42px, 5vw, 72px);
-  font-weight: 300;
-  line-height: 1.1;
-  color: #F0EAE0;
-  letter-spacing: -0.5px;
-  margin: 0;
-}
+  .cl2-title.centered {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: clamp(42px, 5vw, 72px);
+    font-weight: 300;
+    line-height: 1.1;
+    color: #F0EAE0;
+    letter-spacing: -0.5px;
+    margin: 0;
+  }
 
-
-  /* ─── Bottom ornament ─── */
   .cl2-footer {
     margin-top: 72px;
     display: flex;
@@ -331,7 +323,6 @@ const styles = `
     text-transform: uppercase;
   }
 
-  /* ─── Responsive ─── */
   @media (max-width: 1024px) {
     .cl2-header { grid-template-columns: 1fr; gap: 36px; }
     .cl2-section { padding: 110px 40px 120px; }
@@ -348,7 +339,6 @@ const styles = `
 `;
 
 export default function ClientsSection() {
-  // Two separate rows with slightly different sets for visual variety
   const row1 = [...clients, ...clients];
   const row2 = [
     ...clients.slice(5),
@@ -364,8 +354,6 @@ export default function ClientsSection() {
         <div className="cl2-noise" />
 
         <div className="cl2-inner">
-          {/* ── Header ── */}
-          {/* ── Header ── */}
           <Reveal>
             <div className="cv2-header">
               <p className="cv2-label">Our Network</p>
@@ -410,7 +398,6 @@ export default function ClientsSection() {
             </div>
           </Reveal>
 
-          {/* ── Marquee ── */}
           <Reveal delay={300}>
             <div className="cl2-marquee-outer">
               {/* Row 1 — scrolls left */}
@@ -422,6 +409,11 @@ export default function ClientsSection() {
                       src={c.src}
                       alt={c.name}
                       draggable={false}
+                      // ✅ FIX: lazy load marquee images — they're below the fold
+                      loading="lazy"
+                      width="200"
+                      height="72"
+                      decoding="async"
                     />
                   </div>
                 ))}
@@ -436,6 +428,11 @@ export default function ClientsSection() {
                       src={c.src}
                       alt={c.name}
                       draggable={false}
+                      // ✅ FIX: lazy load marquee images
+                      loading="lazy"
+                      width="200"
+                      height="72"
+                      decoding="async"
                     />
                   </div>
                 ))}
@@ -443,7 +440,6 @@ export default function ClientsSection() {
             </div>
           </Reveal>
 
-          {/* ── Footer ornament ── */}
           <Reveal delay={400}>
             <div className="cl2-footer">
               <div className="cl2-footer-line rev" />

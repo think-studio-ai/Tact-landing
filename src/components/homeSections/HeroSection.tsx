@@ -1,8 +1,10 @@
-import  { useEffect, useState } from "react";
+// src/components/homeSections/HeroSection.tsx
+// ✅ KEY CHANGE: Hero background is now an <img> tag instead of CSS background-image
+// This makes it discoverable by the browser's preload scanner → fixes LCP
+
+import { useEffect, useState } from "react";
 
 const styles = `
-  @import url('https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;1,300;1,400&family=Cormorant+SC:wght@300;400&family=EB+Garamond:ital,wght@0,400;1,400&display=swap');
-
   .hero {
     position: relative;
     height: 100vh;
@@ -13,17 +15,20 @@ const styles = `
     background: #05080A;
   }
 
-  .hero-bg {
+  /* ✅ FIX: img tag instead of CSS background so browser can preload it */
+  .hero-bg-img {
     position: absolute;
     inset: 0;
-    background-image: url('https://images.unsplash.com/photo-1600585154526-990dced4db0d?w=1900&q=90&fit=crop&crop=center');
-    background-size: cover;
-    background-position: center 40%;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: center 40%;
     transform-origin: center;
     transition: transform 2.4s cubic-bezier(0.16, 1, 0.3, 1), opacity 2s ease;
+    /* Intentionally NOT lazy — this is LCP */
   }
-  .hero-bg.loading { transform: scale(1.09); opacity: 0; }
-  .hero-bg.loaded  { transform: scale(1);    opacity: 1; }
+  .hero-bg-img.loading { transform: scale(1.09); opacity: 0; }
+  .hero-bg-img.loaded  { transform: scale(1);    opacity: 1; }
 
   .hero-overlay {
     position: absolute;
@@ -38,6 +43,7 @@ const styles = `
         rgba(3,5,7,0.55) 0%,
         transparent 50%,
         rgba(3,5,7,0.85) 100%);
+    z-index: 1;
   }
 
   .hero-noise {
@@ -46,6 +52,7 @@ const styles = `
     opacity: 0.025;
     background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='300' height='300'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.75' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='300' height='300' filter='url(%23n)' opacity='1'/%3E%3C/svg%3E");
     pointer-events: none;
+    z-index: 1;
   }
 
   .hero-side-rule {
@@ -61,7 +68,6 @@ const styles = `
   }
   .hero-side-rule.loaded { height: 220px; }
 
-  /* ── Main content ── */
   .hero-content {
     position: relative;
     z-index: 4;
@@ -179,7 +185,6 @@ const styles = `
     color: #B8975A;
   }
 
-  /* Scroll indicator */
   .hero-scroll {
     position: absolute;
     bottom: 40px;
@@ -222,12 +227,6 @@ const styles = `
   .hero-corner.loaded { opacity: 1; }
   .hero-corner svg { width: 60px; height: 60px; }
 
-  /* ── DESKTOP: two columns ── */
-  @media (min-width: 901px) {
-    /* nothing changes from original */
-  }
-
-  /* ── MOBILE ── */
   @media (max-width: 900px) {
     .hero-content {
       grid-template-columns: 1fr;
@@ -239,36 +238,26 @@ const styles = `
       height: 100%;
       overflow-y: auto;
     }
-
     .hero-side-rule { display: none; }
     .hero-title { font-size: clamp(48px, 11vw, 72px); }
-
-    /* Show right column on mobile — stacked below */
     .hero-right {
       display: flex;
       padding-top: 32px;
       border-top: 1px solid rgba(184,151,90,0.12);
       margin-top: 8px;
     }
-
-    /* Slightly smaller quote mark on mobile */
     .hero-quote-mark { font-size: 48px; }
-
-    /* Badge smaller on mobile */
     .hero-badge {
       font-size: 8px;
       letter-spacing: 4px;
       padding: 8px 16px;
       margin-bottom: 28px;
     }
-
-    /* Quote text readable on small screens */
     .hero-quote {
       font-size: clamp(14px, 3.8vw, 16px);
       max-width: 100%;
       line-height: 1.9;
     }
-
     .hero-scroll { display: none; }
     .hero-corner { display: none; }
   }
@@ -286,7 +275,23 @@ export default function HeroSection() {
     <>
       <style>{styles}</style>
       <section className="hero">
-        <div className={`hero-bg ${cls}`} />
+        {/* ✅ FIX: <img> tag instead of CSS background — browser can preload this for LCP */}
+        <img
+          className={`hero-bg-img ${cls}`}
+          // ✅ FIX: Add fm=webp for WebP format, smaller file size
+          src="https://images.unsplash.com/photo-1600585154526-990dced4db0d?w=1400&q=80&fit=crop&crop=center&fm=webp"
+          // Fallback for browsers without WebP (Unsplash handles this automatically)
+          alt=""
+          // ✅ FIX: fetchpriority=high so browser loads this before anything else
+          fetchPriority="high"
+          // ✅ FIX: NOT lazy — this is the LCP element
+          loading="eager"
+          // ✅ FIX: Explicit dimensions prevent layout shift
+          width="1400"
+          height="933"
+          decoding="async"
+          aria-hidden="true"
+        />
         <div className="hero-overlay" />
         <div className="hero-noise" />
         <div className={`hero-side-rule ${cls}`} />
@@ -310,7 +315,6 @@ export default function HeroSection() {
         </div>
 
         <div className="hero-content">
-          {/* LEFT: Brand + Title */}
           <div className="hero-left">
             <p className={`hero-eyebrow ${cls}`}>
               Est. 2025 &nbsp;·&nbsp; Cairo, Egypt
@@ -326,7 +330,6 @@ export default function HeroSection() {
             </div>
           </div>
 
-          {/* RIGHT: Quote — now visible on mobile too */}
           <div className="hero-right">
             <div className={`hero-badge ${cls}`}>
               Design &amp; General Contracting

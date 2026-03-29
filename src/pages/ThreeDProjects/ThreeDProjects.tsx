@@ -11,7 +11,7 @@ import ProjectSection, {
 // ─────────────────────────────────────────────
 
 const UNSPLASH = (id: string, w = 900) =>
-  `https://images.unsplash.com/${id}?w=${w}&q=85&fit=crop`;
+  `https://images.unsplash.com/${id}?w=${w}&q=75&fit=crop&fm=webp`;
 
 const projects = [
   {

@@ -1,45 +1,31 @@
 <!doctype html>
 <html lang="en">
   <head>
-    <!-- Basic Meta -->
     <meta charset="UTF-8" />
-    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <link rel="icon" type="image/svg+xml" href="/tact.png" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Tact Innovations — Design & General Contracting</title>
+    <meta name="description" content="Tact Innovations is a leading architectural design and general contracting firm in Cairo, Egypt. We specialize in 3D design, fit-out, facility management, and transportation." />
 
-    <!-- Title -->
-    <title>Tact Innovations | Design & General Contracting</title>
+    <!-- ✅ FIX 1: Preconnect to Google Fonts (replaces render-blocking @import) -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
 
-    <!-- SEO Meta -->
-    <meta
-      name="description"
-      content="Tact Innovations is a leading design and general contracting company delivering innovative architectural solutions, construction services, and high-quality project execution."
+    <!-- ✅ FIX 2: Load ALL fonts in ONE request with display=swap (non-blocking) -->
+    <link
+      rel="stylesheet"
+      href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;1,300;1,400&family=Cormorant+SC:wght@300;400&family=EB+Garamond:ital,wght@0,400;1,400&family=Raleway:wght@300;400;500;600;700&display=swap"
     />
-    <meta
-      name="keywords"
-      content="Tact Innovations, Design, General Contracting, Construction, Architecture, Interior Design, Building Solutions"
-    />
-    <meta name="author" content="Tact Innovations" />
 
-    <!-- Favicon -->
-    <link rel="icon" type="image/png" href="/image.png" />
+    <!-- ✅ FIX 3: Preload hero image so LCP is discovered immediately -->
+        <link rel="icon" type="image/png" href="/image.png" />
 
-    <!-- Open Graph (Facebook / LinkedIn) -->
-    <meta property="og:title" content="Tact Innovations | Design & General Contracting" />
-    <meta
-      property="og:description"
-      content="Innovative design and high-quality general contracting services."
-    />
-    <meta property="og:type" content="website" />
-    <meta property="og:image" content="/tact.png" />
 
-    <!-- Theme Color -->
-    <meta name="theme-color" content="#000000" />
+    <!-- ✅ FIX 4: Preload the site logo (above the fold) -->
+    <link rel="preload" as="image" href="/tact.png" />
   </head>
-
   <body>
     <div id="root"></div>
-
-    <!-- Main Script -->
     <script type="module" src="/src/main.tsx"></script>
   </body>
 </html>

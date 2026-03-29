@@ -1,8 +1,15 @@
+// src/components/homeSections/AboutSection.tsx
+// ✅ CHANGES:
+// 1. Removed @import Google Fonts (now loaded once in index.html)
+// 2. Added width/height/loading="lazy" to the about image
+// 3. Added fm=webp to Unsplash URL
+
 import { Reveal } from "../../utils/Reveal";
 import SplitText from "../SplitText";
 import CountUp from "../CountUp";
 
 const styles = `
+  /* NOTE: @import removed — fonts are loaded once in index.html */
 
   .about-section {
     background: #05080A;
@@ -11,7 +18,6 @@ const styles = `
     overflow: hidden;
   }
 
-  /* Ambient background glow */
   .about-section::before {
     content: '';
     position: absolute;
@@ -40,12 +46,10 @@ const styles = `
     z-index: 1;
   }
 
-  /* ── IMAGE SIDE ── */
   .about-image-wrap {
     position: relative;
   }
 
-  /* Gold corner brackets */
   .about-image-wrap::before,
   .about-image-wrap::after {
     content: '';
@@ -78,7 +82,6 @@ const styles = `
     filter: grayscale(12%) contrast(1.07) brightness(0.93);
   }
 
-  /* Offset decorative frame behind image */
   .about-frame {
     position: absolute;
     top: 28px; left: 28px;
@@ -88,7 +91,6 @@ const styles = `
     pointer-events: none;
   }
 
-  /* Gold ribbon on left edge of image */
   .about-image-ribbon {
     position: absolute;
     left: -1px; top: 60px; bottom: 60px;
@@ -97,7 +99,6 @@ const styles = `
     z-index: 2;
   }
 
-  /* Year badge overlaid on image */
   .about-image-badge {
     position: absolute;
     bottom: -20px;
@@ -127,12 +128,10 @@ const styles = `
     margin-top: 8px;
   }
 
-  /* ── TEXT SIDE ── */
   .about-text {
     padding-top: 20px;
   }
 
-  /* Section label */
   .about-label {
     font-family: 'Cormorant SC', serif;
     font-size: 9px;
@@ -152,7 +151,6 @@ const styles = `
     flex-shrink: 0;
   }
 
-  /* Headline */
   .about-title {
     font-family: 'Cormorant Garamond', serif;
     font-size: clamp(38px, 4.5vw, 64px);
@@ -167,7 +165,6 @@ const styles = `
     color: #C4A464;
   }
 
-  /* Ornament */
   .about-ornament {
     display: flex;
     align-items: center;
@@ -185,7 +182,6 @@ const styles = `
     flex-shrink: 0;
   }
 
-  /* Body text */
   .about-body {
     font-family: '', serif;
     font-size: clamp(15px, 1.2vw, 17px);
@@ -201,7 +197,6 @@ const styles = `
     color: rgba(240,234,224,0.42);
   }
 
-  /* Stats row */
   .about-stats {
     display: flex;
     gap: 0;
@@ -251,7 +246,6 @@ const styles = `
     color: #C4A464;
   }
 
-  /* Top border above stats */
   .about-stats-rule {
     height: 1px;
     background: linear-gradient(90deg, rgba(184,151,90,0.25), transparent);
@@ -281,15 +275,21 @@ export default function AboutSection() {
       <style>{styles}</style>
       <section className="about-section">
         <div className="about-inner">
-          {/* ── Left: Image ── */}
           <Reveal direction="left" delay={100}>
             <div className="about-image-wrap">
               <div className="about-image-inner">
                 <div className="about-image-ribbon" />
                 <img
                   className="about-image"
-                  src="https://images.unsplash.com/photo-1600607687939-ce8a6c25118c?w=900&q=88&fit=crop&crop=center"
-                  alt="Tact Innovations — Architecture"
+                  // ✅ FIX: WebP format + lower quality for faster load
+                  src="https://images.unsplash.com/photo-1600607687939-ce8a6c25118c?w=900&q=75&fit=crop&crop=center&fm=webp"
+                  alt="Tact Innovations — Architecture interior"
+                  // ✅ FIX: lazy load (below the fold)
+                  loading="lazy"
+                  // ✅ FIX: Explicit dimensions prevent CLS
+                  width="900"
+                  height="1200"
+                  decoding="async"
                 />
                 <div className="about-frame" />
               </div>
@@ -300,7 +300,6 @@ export default function AboutSection() {
             </div>
           </Reveal>
 
-          {/* ── Right: Text ── */}
           <Reveal direction="right" delay={200}>
             <div className="about-text">
               <p className="about-label">Who We Are</p>
@@ -351,10 +350,9 @@ export default function AboutSection() {
                 With a passion for innovation, sustainability, and aesthetics,
                 we transform architectural dreams into reality.
               </p>
-              
 
               <div className="about-stats-rule" />
-              <div className="about-stats ">
+              <div className="about-stats">
                 {[
                   { from: 0, to: 15, suffix: "+", lbl: "Years of Excellence" },
                   { from: 0, to: 200, suffix: "+", lbl: "Projects Completed" },
