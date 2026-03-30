@@ -278,15 +278,16 @@ export default function HeroSection() {
         {/* ✅ FIX: <img> tag instead of CSS background — browser can preload this for LCP */}
         <img
           className={`hero-bg-img ${cls}`}
-          // ✅ FIX: Add fm=webp for WebP format, smaller file size
-          src="https://images.unsplash.com/photo-1600585154526-990dced4db0d?w=1200&q=60&fit=crop&crop=center&fm=webp"
-          // Fallback for browsers without WebP (Unsplash handles this automatically)
+          src="https://images.unsplash.com/photo-1600585154526-990dced4db0d?w=800&q=55&fit=crop&crop=center&fm=webp"
+          srcSet="
+    https://images.unsplash.com/photo-1600585154526-990dced4db0d?w=600&q=50&fit=crop&crop=center&fm=webp 600w,
+    https://images.unsplash.com/photo-1600585154526-990dced4db0d?w=900&q=55&fit=crop&crop=center&fm=webp 900w,
+    https://images.unsplash.com/photo-1600585154526-990dced4db0d?w=1400&q=65&fit=crop&crop=center&fm=webp 1400w
+  "
+          sizes="100vw"
           alt=""
-          // ✅ FIX: fetchpriority=high so browser loads this before anything else
           fetchPriority="high"
-          // ✅ FIX: NOT lazy — this is the LCP element
           loading="eager"
-          // ✅ FIX: Explicit dimensions prevent layout shift
           width="1400"
           height="933"
           decoding="async"
